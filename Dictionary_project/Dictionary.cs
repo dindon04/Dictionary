@@ -65,6 +65,26 @@ public class Dictionary
         Console.WriteLine($"dictionary \"{Name}\" exported to file \"{filename}\"");
     }
 
+    public static void CopyWordsToFile(Dictionary sourceDictionary, string filename, List<string> wordsToCopy)
+    {
+        using (StreamWriter sw = new StreamWriter(filename))
+        {
+            foreach (var word in wordsToCopy)
+            {
+                if (sourceDictionary.WordInDictionary.TryGetValue(word, out var translations))
+                {
+                    sw.WriteLine($"{word}: {string.Join(", ", translations)}");
+                }
+                else
+                {
+                    Console.WriteLine($"Word \"{word}\" not found in the dictionary. Skipping...");
+                }
+            }
+        }
+
+        Console.WriteLine($"Selected words copied from dictionary \"{sourceDictionary.Name}\" to file \"{filename}\"");
+    }
+
     private void SaveToFile()
     {
         ExportToFile($"{Name}.txt");

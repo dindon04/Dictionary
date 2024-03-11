@@ -17,8 +17,8 @@ public static class DictionaryActions
         dictionaries.Add(newDictionary);
         Console.WriteLine($"\ndictionary \"{newDictionary.Name}\" created");
 
-        Console.Write($"\nEnter to return to menu...");
-        Console.ReadLine();
+        //Console.Write($"\nEnter to return to menu...");
+        //Console.ReadLine();
     }
 
     public static void AddWordToDictionary(List<Dictionary> dictionaries)
@@ -42,8 +42,8 @@ public static class DictionaryActions
         }
         else Console.WriteLine("please, create a dictionary");
 
-        Console.Write($"\nEnter to return to menu...");
-        Console.ReadLine();
+        //Console.Write($"\nEnter to return to menu...");
+        //Console.ReadLine();
     }
 
     public static void EditTranslationInDictionary(List<Dictionary> dictionaries)
@@ -66,8 +66,8 @@ public static class DictionaryActions
         }
         else Console.WriteLine("please, create a dictionary");
 
-        Console.Write($"\nEnter to return to menu...");
-        Console.ReadLine();
+        //Console.Write($"\nEnter to return to menu...");
+        //Console.ReadLine();
     }
 
     public static void DeleteWordFromDictionary(List<Dictionary> dictionaries)
@@ -88,8 +88,8 @@ public static class DictionaryActions
         }
         else Console.WriteLine("please, create a dictionary");
 
-        Console.Write($"\nEnter to return to menu...");
-        Console.ReadLine();
+        //Console.Write($"\nEnter to return to menu...");
+        //Console.ReadLine();
     }
 
     public static void SearchForTranslation(List<Dictionary> dictionaries)
@@ -111,8 +111,8 @@ public static class DictionaryActions
         }
         else Console.WriteLine("please, create a dictionary");
 
-        Console.Write($"\nEnter to return to menu...");
-        Console.ReadLine();
+        //Console.Write($"\nEnter to return to menu...");
+        //Console.ReadLine();
     }
 
     public static void ExportDictionaryToFile(List<Dictionary> dictionaries)
@@ -133,7 +133,41 @@ public static class DictionaryActions
         }
         else Console.WriteLine("please, create a dictionary");
 
-        Console.Write($"\nEnter to return to menu...");
-        Console.ReadLine();
+        //Console.Write($"\nEnter to return to menu...");
+        //Console.ReadLine();
     }
+
+    public static void CopyWordsToFile(List<Dictionary> dictionaries)
+    {
+        if (dictionaries.Count > 0)
+        {
+            Console.Write("Enter dictionary name: ");
+            string dictionaryName = Console.ReadLine();
+            Dictionary currentDictionary = dictionaries.FirstOrDefault(d => d.Name == dictionaryName);
+
+            if (currentDictionary != null)
+            {
+                Console.Write("Enter filename to copy the words: ");
+                string filename = Console.ReadLine();
+
+                Console.Write("Enter words to copy, separated by \",\": ");
+                List<string> wordsToCopy = new List<string>(Console.ReadLine().Split(','));
+
+                DictionaryManager.CopyWordsToFile(currentDictionary, filename, wordsToCopy);
+            }
+            else
+            {
+                Console.WriteLine($"Dictionary \"{dictionaryName}\" not found");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Please, create a dictionary");
+        }
+
+        //Console.Write($"\nEnter to return to menu...");
+        //Console.ReadLine();
+    }
+
 }
+

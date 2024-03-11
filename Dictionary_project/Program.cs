@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
-using static DictionaryActions;
+﻿using System;
+using System.Collections.Generic;
+
 class Program
 {
     static List<Dictionary> dictionaries = new List<Dictionary>();
-    // static List<Dictionary> dictionaries;
 
     static void Main()
     {
         //dictionaries = DictionaryManager.LoadDictionaries();
+
         while (true)
         {
             Console.Clear();
@@ -15,11 +16,11 @@ class Program
 
             string select = Console.ReadLine();
 
-            MenuSwitchChoise(select);
+            MenuSwitchChoice(select);
         }
     }
 
-    static void MenuSwitchChoise(string select)
+    static void MenuSwitchChoice(string select)
     {
         Console.Clear();
 
@@ -43,13 +44,19 @@ class Program
             case "6":
                 DictionaryActions.ExportDictionaryToFile(dictionaries);
                 break;
+            case "7":
+                DictionaryActions.CopyWordsToFile(dictionaries);
+                break;
             case "0":
                 Environment.Exit(0);
                 break;
             default:
-                Console.WriteLine("invalid choice. Select menu item again");
+                Console.WriteLine("Invalid choice. Select a menu item again");
                 break;
         }
+
+        Console.Write("\nEnter to return to the menu...");
+        Console.ReadLine();
     }
 
     static void PrintMenu()
@@ -60,7 +67,8 @@ class Program
         Console.WriteLine("4. Delete word or translation from the dictionary");
         Console.WriteLine("5. Search for translation of word");
         Console.WriteLine("6. Export dictionary to a file");
+        Console.WriteLine("7. Copy selected words from dictionary to a file"); // Add this line for the new option
         Console.WriteLine("0. Exit");
-        Console.Write("\nChoose an action (0-6): ");
+        Console.Write("\nChoose an action (0-7): ");
     }
 }
