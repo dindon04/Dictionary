@@ -46,6 +46,28 @@ public class Dictionary
         else Console.WriteLine($"word \"{word}\" not found in the dictionary. No changes");
     }
 
+    public void DeleteAllTranslationsExceptLast(string word)
+    {
+        if (WordInDictionary.ContainsKey(word))
+        {
+            List<string> translations = WordInDictionary[word];
+            if (translations.Count > 1)
+            {
+                translations.RemoveRange(0, translations.Count - 1);
+                Console.WriteLine($"All translations except the last one for word \"{word}\" deleted");
+                SaveToFile();
+            }
+            else
+            {
+                Console.WriteLine($"Only one translation exists for word \"{word}\". No changes made.");
+            }
+        }
+        else
+        {
+            Console.WriteLine($"Word \"{word}\" not found in the dictionary. No changes made.");
+        }
+    }
+
     public string SearchTranslation(string word)
     {
         if (WordInDictionary.ContainsKey(word)) return string.Join(", ", WordInDictionary[word]);

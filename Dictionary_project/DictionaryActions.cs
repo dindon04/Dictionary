@@ -82,15 +82,45 @@ public static class DictionaryActions
             {
                 Console.Write("Enter word to delete from the dictionary: ");
                 string wordToDelete = Console.ReadLine();
-                currentDictionary.DeleteWord(wordToDelete);
-            }
-            else Console.WriteLine($"Dictionary \"{dictionaryName}\" not found");
-        }
-        else Console.WriteLine("please, create a dictionary");
 
-        //Console.Write($"\nEnter to return to menu...");
-        //Console.ReadLine();
+                Console.WriteLine("Choose deletion option:");
+                Console.WriteLine("1. Delete word with all translations");
+                Console.WriteLine("2. Delete all translations except the last one");
+
+                if (int.TryParse(Console.ReadLine(), out int choice))
+                {
+                    switch (choice)
+                    {
+                        case 1:
+                            currentDictionary.DeleteWord(wordToDelete);
+                            break;
+                        case 2:
+                            currentDictionary.DeleteAllTranslationsExceptLast(wordToDelete);
+                            break;
+                        default:
+                            Console.WriteLine("Invalid choice. No changes made.");
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. No changes made.");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Dictionary \"{dictionaryName}\" not found");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Please, create a dictionary");
+        }
+
+        Console.Write("\nEnter to return to menu...");
+        Console.ReadLine();
     }
+
 
     public static void SearchForTranslation(List<Dictionary> dictionaries)
     {

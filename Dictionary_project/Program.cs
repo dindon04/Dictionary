@@ -7,8 +7,6 @@ class Program
 
     static void Main()
     {
-        //dictionaries = DictionaryManager.LoadDictionaries();
-
         while (true)
         {
             Console.Clear();
