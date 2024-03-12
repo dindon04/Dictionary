@@ -7,19 +7,36 @@ public static class DictionaryActions
         Console.Write("Enter dictionary name: ");
         string name = Console.ReadLine();
 
-        Console.WriteLine("\nEnter the languages");
-        Console.Write("translate from: ");
-        string languageFrom = Console.ReadLine();
-        Console.Write("translate to: ");
-        string languageTo = Console.ReadLine();
+        if (IsDictionaryNameUnique(dictionaries, name))
+        {
+            Console.WriteLine("\nEnter the languages");
+            Console.Write("translate from: ");
+            string languageFrom = Console.ReadLine();
+            Console.Write("translate to: ");
+            string languageTo = Console.ReadLine();
 
-        Dictionary newDictionary = new Dictionary(name, languageFrom, languageTo);
-        dictionaries.Add(newDictionary);
-        Console.WriteLine($"\ndictionary \"{newDictionary.Name}\" created");
+            Dictionary newDictionary = new Dictionary(name, languageFrom, languageTo);
+            dictionaries.Add(newDictionary);
+            Console.WriteLine($"\ndictionary \"{newDictionary.Name}\" created");
+        }
+        else Console.WriteLine($"Dictionary  \"{name}\" already exists");
 
         //Console.Write($"\nEnter to return to menu...");
         //Console.ReadLine();
     }
+
+    private static bool IsDictionaryNameUnique(List<Dictionary> dictionaries, string name)
+    {
+        foreach (var dictionary in dictionaries)
+        {
+            if (dictionary.Name == name)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public static void AddWordToDictionary(List<Dictionary> dictionaries)
     {
